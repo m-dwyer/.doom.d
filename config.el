@@ -77,4 +77,27 @@
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
-  (setq org-agenda-files `(,md--org-tasks ,md--org-recurring-tasks ,md--org-projects-dir)))
+  (setq org-agenda-files `(,md--org-tasks ,md--org-recurring-tasks ,md--org-projects-dir))
+
+  (setq org-enforce-todo-dependencies t)
+
+  (setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w)" "|" "DONE(d!)" "CANCELLED(c)")
+        (sequence "RECURRING" "|" "DONE")
+        ))
+
+  (setq org-tags-exclude-from-inheritance '("project"))
+
+  ;; Show actionable tasks
+  (setq org-agenda-custom-commands
+        '(("n" "Next Tasks"
+           ((todo "NEXT"
+                  ((org-agenda-overriding-header "Next Tasks")))))
+          ("d" "Dashboard"
+           ((agenda "" ((org-deadline-warning-days 7)))
+            (todo "NEXT"
+                  ((org-agenda-overriding-header "Next Tasks")))))
+          ("e" "Low Effort" tags-todo "+TODO=\"NEXT\"+Effort<=15&+Effort>0"
+           ((org-agenda-overriding-header "Low Effort Tasks")
+            (org-agenda-max-todos 20)))
+          ("W" "Work Tasks" tags-todo "+@work"))))
