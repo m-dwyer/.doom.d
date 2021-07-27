@@ -101,3 +101,11 @@
            ((org-agenda-overriding-header "Low Effort Tasks")
             (org-agenda-max-todos 20)))
           ("W" "Work Tasks" tags-todo "+@work"))))
+
+(use-package! org-journal
+  :after org
+  :config
+  (setq org-journal-dir md--org-journal-dir)
+  (setq org-journal-file-type 'weekly)
+  (setq org-journal-date-format "%A, %d %B %Y")
+  (setq org-journal-file-format "%Y-W%V.org"))
