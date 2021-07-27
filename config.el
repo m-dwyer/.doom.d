@@ -52,3 +52,29 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+;; General config
+;;
+;; Reload buffer when file changes on disk
+(global-auto-revert-mode t)
+
+(use-package! org
+  :config
+  (setq org-ellipsis " ▾")
+
+  (setq md--org-templates-dir (expand-file-name "templates" user-emacs-directory))
+  (setq md--org-journal-dir (expand-file-name "journal" org-directory))
+  (setq md--org-reviews-dir (expand-file-name "reviews" org-directory))
+  (setq md--org-projects-dir (expand-file-name "projects" org-directory))
+
+  (setq md--org-project-template (expand-file-name "project.org" md--org-templates-dir))
+  (setq md--org-weekly-review-template (expand-file-name "weekly-review.org" md--org-templates-dir))
+
+  (setq md--org-tasks (expand-file-name "tasks.org" org-directory))
+  (setq md--org-recurring-tasks (expand-file-name "recurring.org" org-directory))
+  (setq md--org-incubate (expand-file-name "incubate.org" org-directory))
+
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+  (setq org-agenda-files `(,md--org-tasks ,md--org-recurring-tasks ,md--org-projects-dir)))
