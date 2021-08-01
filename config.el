@@ -87,20 +87,7 @@
         ))
 
   (setq org-tags-exclude-from-inheritance '("project"))
-
-  ;; Show actionable tasks
-  (setq org-agenda-custom-commands
-        '(("n" "Next Tasks"
-           ((todo "NEXT"
-                  ((org-agenda-overriding-header "Next Tasks")))))
-          ("d" "Dashboard"
-           ((agenda "" ((org-deadline-warning-days 7)))
-            (todo "NEXT"
-                  ((org-agenda-overriding-header "Next Tasks")))))
-          ("e" "Low Effort" tags-todo "+TODO=\"NEXT\"+Effort<=15&+Effort>0"
-           ((org-agenda-overriding-header "Low Effort Tasks")
-            (org-agenda-max-todos 20)))
-          ("W" "Work Tasks" tags-todo "+@work"))))
+)
 
 (use-package! org-journal
   :after org
@@ -109,3 +96,41 @@
   (setq org-journal-file-type 'weekly)
   (setq org-journal-date-format "%A, %d %B %Y")
   (setq org-journal-file-format "%Y-W%V.org"))
+
+(use-package! org-super-agenda
+  :after org-agenda
+  :init
+  (setq org-agenda-block-separator nil
+        org-agenda-custom-commands
+        '(("t" "Today view"
+           ((agenda "" ((org-agenda-overriding-header "")
+                        (org-agenda-span 'day)
+                        (org-agenda-start-day nil)
+                        ;; always show timelines!
+                        (org-agenda-time-grid '((daily today) (800 1000 1200 1400 1600 1800 2000) "......" "----------------"))
+                        (org-super-agenda-groups
+                         '((:name "Overdue (past scheduled/deadline)"
+                            :deadline past
+                            :scheduled past
+                            :order 1
+                            )
+                           (:name "Scheduled Today"
+                            :time-grid t
+                            :date today
+                            :order 2)
+                           (:discard (:anything t))))))
+            (alltodo "" ((org-agenda-overriding-header "")
+                         (org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t%-6e% s")
+                                                     (todo . " %i %-12:c %-6e")
+                                                     (tags . " %i %-12:c")
+                                                     (search . " %i %-12:c")))
+                         (org-super-agenda-groups
+                          '((:name "Low Effort (<= 15 min)"
+                            :and (:effort< "0:16")
+                            :order 1)
+                            (:name "Next Tasks"
+                            :todo "NEXT"
+                            :order 2)
+                            (:discard (:anything t))))))))))
+  :config
+  (org-super-agenda-mode))
