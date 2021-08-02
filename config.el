@@ -22,6 +22,8 @@
 (setq doom-font (font-spec :family "Fira Mono" :size 16)
       doom-variable-pitch-font (font-spec :family "Cantarell" :size 16))
 
+(add-hook! 'org-mode-hook #'+org-pretty-mode)
+
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
