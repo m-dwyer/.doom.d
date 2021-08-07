@@ -74,7 +74,7 @@
   :config
   (setq org-ellipsis " ▾")
 
-  (setq md--org-templates-dir (expand-file-name "templates" user-emacs-directory))
+  (setq md--org-templates-dir (expand-file-name "templates" doom-private-dir))
   (setq md--org-journal-dir (expand-file-name "journal" org-directory))
   (setq md--org-reviews-dir (expand-file-name "reviews" org-directory))
   (setq md--org-projects-dir (expand-file-name "projects" org-directory))
@@ -146,3 +146,21 @@
                             (:discard (:anything t))))))))))
   :config
   (org-super-agenda-mode))
+
+(defun md/get-project-name ()
+  (setq md--org-capture-project (read-string "Project name:"))
+  (expand-file-name
+   (format "%s.org" (s-dashed-words md--org-capture-project)) md--org-projects-dir))
+
+(defun md/get-current-review-name ()
+  (expand-file-name
+   (format "%s.org" (format-time-string "%Y-%m-%B")) md--org-reviews-dir))
+
+(setq org-capture-templates
+      `(("p" "Project" entry (file md/get-project-name)
+         (file ,md--org-project-template))
+        ("t" "Task" entry (file+headline md--org-tasks "Tasks")
+         "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
+        ("r" "Review")
+        ("rw" "Weekly Review" entry (file+olp+datetree md/get-current-review-name)
+         (file ,md--org-weekly-review-template) :tree-type week)))

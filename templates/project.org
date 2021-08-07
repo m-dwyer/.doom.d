@@ -1,0 +1,32 @@
+* Project Name :project:
+DEADLINE: %^t
+:PROPERTIES:
+:STARTDATE: %u
+:COOKIE_DATA: todo recursive
+:END:
+%^{OUTCOME}p
+%^{AREA}p
+
+** Project Start Checklist
+- [ ] Add project tags for context (e.g. work, personal)
+- [ ] Write Project Overview
+- [ ] List specific tasks
+- [ ] Schedule next actions from tasks
+
+** Project Overview
+%?
+
+** Project  Tasks [0/2] [0%]
+:PROPERTIES:
+:ORDERED:  t
+:TRIGGER: next-sibling scheduled!("++1d") todo!(NEXT)
+:BLOCKER: previous-sibling
+:END:
+*** NEXT Next action
+:PROPERTIES:
+:EFFORT: 1h
+:END:
+*** TODO ...
+:PROPERTIES:
+:Effort: 1h
+:END:
