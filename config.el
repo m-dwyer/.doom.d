@@ -21,9 +21,11 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "JetBrains Mono" :size 20)
-      doom-variable-pitch-font (font-spec :family "Overpass" :size 20)
-      doom-big-font (font-spec :family "JetBrains Mono" :size 34))
+(setq doom-font (font-spec :family "JetBrains Mono" :size 30)
+      doom-variable-pitch-font (font-spec :family "Overpass" :size 30)
+      doom-big-font (font-spec :family "JetBrains Mono" :size 44))
+
+(setq org-hide-emphasis-markers t)
 
 (use-package! mixed-pitch
   :config
