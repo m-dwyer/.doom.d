@@ -27,6 +27,8 @@
 
 (setq org-hide-emphasis-markers t)
 
+(add-hook! 'org-mode-hook (lambda ()  (org-superstar-mode 1)))
+
 (use-package! mixed-pitch
   :config
   (add-hook 'org-mode-hook #'mixed-pitch-mode))
