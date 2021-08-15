@@ -123,7 +123,12 @@
                         ;; always show timelines!
                         (org-agenda-time-grid '((daily today) (800 1000 1200 1400 1600 1800 2000) "......" "----------------"))
                         (org-super-agenda-groups
-                         '((:name "Overdue (past scheduled/deadline)"
+                         '((:name "Habits"
+                            :habit t
+                            :date today
+                            :order 2
+                            )
+                           (:name "Overdue (past scheduled/deadline)"
                             :deadline past
                             :scheduled past
                             :order 1
@@ -131,7 +136,7 @@
                            (:name "Scheduled Today"
                             :time-grid t
                             :date today
-                            :order 2)
+                            :order 3)
                            (:discard (:anything t))))))
             (alltodo "" ((org-agenda-overriding-header "")
                          (org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t%-6e% s")
