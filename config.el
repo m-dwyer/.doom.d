@@ -150,7 +150,12 @@
                             (:name "Next Tasks"
                             :todo "NEXT"
                             :order 2)
-                            (:discard (:anything t))))))))))
+                            (:discard (:anything t))))))))
+          ("w" "Week view"
+           ((agenda "" ((org-agenda-overriding-header "Week view")
+                      (org-agenda-span 'week)
+                      (org-agenda-start-on-weekday 1)
+                      ))))))
   :config
   (org-super-agenda-mode))
 
