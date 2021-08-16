@@ -48,6 +48,14 @@
   (custom-set-faces!
     '(org-document-title :height 1.5)))
 
+(use-package! org-appear
+  :hook (org-mode . org-appear-mode)
+  :config
+  (setq org-appear-autoemphasis t)
+  (setq org-appear-autosubmarkers t)
+  (setq org-appear-autolinks t)
+)
+
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
