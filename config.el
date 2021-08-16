@@ -114,8 +114,7 @@
 (use-package! org-super-agenda
   :after org-agenda
   :init
-  (setq org-agenda-block-separator nil
-        org-agenda-custom-commands
+  (setq org-agenda-custom-commands
         '(("t" "Today view"
            ((agenda "" ((org-agenda-overriding-header "")
                         (org-agenda-span 'day)
@@ -123,21 +122,23 @@
                         ;; always show timelines!
                         (org-agenda-time-grid '((daily today) (800 1000 1200 1400 1600 1800 2000) "......" "----------------"))
                         (org-super-agenda-groups
-                         '((:name "Habits"
+                         '((:name "Scheduled Today"
+                            :time-grid t
+                            :date today
+                            :order 1)
+                           (:name "Habits"
                             :habit t
                             :date today
-                            :order 2
-                            )
+                            :order 2)
                            (:name "Overdue (past scheduled/deadline)"
                             :deadline past
                             :scheduled past
-                            :order 1
-                            )
-                           (:name "Scheduled Today"
-                            :time-grid t
-                            :date today
                             :order 3)
-                           (:discard (:anything t))))))
+                           (:discard (:anything t))
+                           )
+                         )
+                        )
+                    )
             (alltodo "" ((org-agenda-overriding-header "")
                          (org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t%-6e% s")
                                                      (todo . " %i %-12:c %-6e")
@@ -145,17 +146,41 @@
                                                      (search . " %i %-12:c")))
                          (org-super-agenda-groups
                           '((:name "Low Effort (<= 15 min)"
-                            :and (:effort< "0:16")
-                            :order 1)
+                             :and (:effort< "0:16")
+                             :order 1)
                             (:name "Next Tasks"
-                            :todo "NEXT"
-                            :order 2)
+                             :todo "NEXT"
+                             :order 2)
                             (:discard (:anything t))))))))
           ("w" "Week view"
            ((agenda "" ((org-agenda-overriding-header "Week view")
-                      (org-agenda-span 'week)
-                      (org-agenda-start-on-weekday 1)
-                      ))))))
+                        (org-agenda-span 'week)
+                        (org-agenda-start-on-weekday 1)
+                        )
+                )
+            (alltodo "" ((org-agenda-overriding-header "")
+                         (org-super-agenda-groups
+                          '((:name "Overdue (past scheduled/deadline)"
+                             :deadline past
+                             :scheduled past
+                             :order 1
+                             )
+                            (:name "Individual Tasks"
+                             :file-path "task"
+                             :order 2
+                             )
+                            (:name "Next tasks"
+                             :todo "NEXT"
+                             :order 3)
+                            (:discard (:anything t))
+                            )
+                          )
+                         )
+            )
+            )
+           )
+          )
+        )
   :config
   (org-super-agenda-mode))
 
