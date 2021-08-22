@@ -240,3 +240,9 @@
         ("r" "Review")
         ("rw" "Weekly Review" entry (file+olp+datetree md/get-current-review-name)
          (file ,md--org-weekly-review-template) :tree-type week)))
+
+(use-package! org-edna
+  :hook
+  '(org-mode . org-edna-mode)
+  :config
+  (setq org-edna-use-inheritance t))
