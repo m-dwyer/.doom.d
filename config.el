@@ -126,6 +126,16 @@
   (setq org-tags-exclude-from-inheritance '("project"))
 )
 
+(defun md/org-mode-visual()
+  (setq visual-fill-column-width 100
+       visual-fill-column-center-text t
+       display-fill-column-indicator nil
+       display-line-numbers nil)
+  (visual-fill-column-mode 1))
+
+(add-hook! 'org-mode-hook
+           #'+org-pretty-mode #'mixed-pitch-mode #'md/org-mode-visual)`
+
 (use-package! org-journal
   :after org
   :config
