@@ -22,7 +22,7 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 (setq doom-font (font-spec :family "JetBrains Mono" :size 30)
-      doom-variable-pitch-font (font-spec :family "Overpass" :size 30)
+      doom-variable-pitch-font (font-spec :family "Cantarell" :size 30)
       doom-big-font (font-spec :family "JetBrains Mono" :size 44))
 
 (setq org-hide-emphasis-markers t)
@@ -32,21 +32,6 @@
 (use-package! mixed-pitch
   :config
   (add-hook 'org-mode-hook #'mixed-pitch-mode))
-
-(after! org
-  (custom-set-faces!
-    '(org-level-1 :height 1.15 :inherit outline-1)
-    '(org-level-2 :height 1.13 :inherit outline-2)
-    '(org-level-3 :height 1.11 :inherit outline-3)
-    '(org-level-4 :height 1.09 :inherit outline-4)
-    '(org-level-5 :height 1.07 :inherit outline-5)
-    '(org-level-6 :height 1.05 :inherit outline-6)
-    '(org-level-7 :height 1.03 :inherit outline-7)
-    '(org-level-8 :height 1.01 :inherit outline-8)))
-
-(after! org
-  (custom-set-faces!
-    '(org-document-title :height 1.5)))
 
 (use-package! org-appear
   :hook (org-mode . org-appear-mode)
@@ -134,7 +119,28 @@
   (visual-fill-column-mode 1))
 
 (add-hook! 'org-mode-hook
-           #'+org-pretty-mode #'mixed-pitch-mode #'md/org-mode-visual)`
+           #'md/org-mode-visual #'+org-pretty-mode)
+
+(after! org
+  (custom-set-faces!
+    '(org-document-title :height 1.5)
+    '(org-level-1 :inherit outline-1 :weight extra-bold :height 1.4)
+    '(org-level-2 :inherit outline-2 :weight bold :height 1.15)
+    '(org-level-3 :inherit outline-3 :weight bold :height 1.12)
+    '(org-level-4 :inherit outline-4 :weight bold :height 1.09)
+    '(org-level-5 :inherit outline-5 :weight semi-bold :height 1.06)
+    '(org-level-6 :inherit outline-6 :weight semi-bold :height 1.03)
+    '(org-level-7 :inherit outline-7 :weight semi-bold)
+    '(org-level-8 :inherit outline-8 :weight semi-bold)
+    ;; Ensure that anything that should be fixed-pitch in org buffers appears that
+    ;; way
+    '(org-block nil :foreground nil :inherit 'fixed-pitch)
+    '(org-code nil   :inherit '(shadow fixed-pitch))
+    '(org-table nil   :inherit '(shadow fixed-pitch))
+    '(org-verbatim nil :inherit '(shadow fixed-pitch))
+    '(org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+    '(org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+    '(org-checkbox nil :inherit 'fixed-pitch)))
 
 (use-package! org-journal
   :after org
