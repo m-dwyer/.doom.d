@@ -88,6 +88,7 @@
   (setq md--org-journal-dir (expand-file-name "journal" org-directory))
   (setq md--org-reviews-dir (expand-file-name "reviews" org-directory))
   (setq md--org-projects-dir (expand-file-name "projects" org-directory))
+  (setq md--org-archive-dir (expand-file-name "archive" org-directory))
 
   (setq md--org-project-template (expand-file-name "project.org" md--org-templates-dir))
   (setq md--org-weekly-review-template (expand-file-name "weekly-review.org" md--org-templates-dir))
@@ -246,3 +247,11 @@
   '(org-mode . org-edna-mode)
   :config
   (setq org-edna-use-inheritance t))
+
+(setq org-archive-location
+      (concat (file-name-as-directory
+               (expand-file-name (format-time-string "%Y" (current-time))
+                           md--org-archive-dir)
+         )
+        "%s_archive::datetree/")
+)
