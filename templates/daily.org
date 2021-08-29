@@ -1,4 +1,3 @@
-#+TITLE: Daily Review
 * Checklist
 - [ ] Action scheduled tasks
 - [ ] Capture any open loops into inbox
