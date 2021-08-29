@@ -1,0 +1,21 @@
+#+TITLE:  %(format-time-string "%B %Y")
+#+GOALS:
+
+* Month Overview
+
+%?
+
+* Monthly Review
+** Review and update Goals
+- [ ] Update goal statuses
+- [ ] Update timelines for existing goals
+- [ ] Update wording/definition of goals
+- [ ] Add new goals
+** Review and update Projects
+- [ ] Archive any completed projects
+- [ ] Update outcome/goal for each project
+- [ ] Order projects by global priority
+** Review and update Areas
+- [ ] Evaluate areas and capture any new tasks, projects, habits, routines or decisions needed
+** Review Someday/Maybe Items
+- [ ] Promote any that I might consider as next actions or projects

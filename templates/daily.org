@@ -1,0 +1,6 @@
+#+TITLE: Daily Review
+* Checklist
+- [ ] Action scheduled tasks
+- [ ] Capture any open loops into inbox
+- [ ] Confirm tomorrow's scheduled tasks
+- [ ] Clock out of tasks

@@ -1,0 +1,28 @@
+#+TITLE:%<%Y> Yearly Planner
+
+* Vision
+The big over-arching vision of year.
+
+#+BEGIN_QUOTE
+Vision is the reason you do what you do.  It's what you want to see happen in the world, and in your life.  Provides guidance for your yearly planning.
+#+END_QUOTE
+
+%?
+
+* Planning
+** Quarter 1
+*** Goals
+*** Wins, Highs
+*** Lows, Challenges
+** Quarter 2
+*** Goals
+*** Wins, Highs
+*** Lows, Challenges
+** Quarter 3
+*** Goals
+*** Wins, Highs
+*** Lows, Challenges
+** Quarter 4
+*** Goals
+*** Wins, Highs
+*** Lows, Challenges

@@ -89,7 +89,11 @@
   (setq md--org-reviews-dir (expand-file-name "reviews" org-directory))
   (setq md--org-projects-dir (expand-file-name "projects" org-directory))
   (setq md--org-archive-dir (expand-file-name "archive" org-directory))
-
+  (setq md--org-plan-dir (expand-file-name "plan" org-directory))
+  (setq md--org-yearly-template (expand-file-name "yearly.org" md--org-templates-dir))
+  (setq md--org-monthly-template (expand-file-name "monthly.org" md--org-templates-dir))
+  (setq md--org-weekly-template (expand-file-name "weekly.org" md--org-templates-dir))
+  (setq md--org-daily-template (expand-file-name "daily.org" md--org-templates-dir))
   (setq md--org-project-template (expand-file-name "project.org" md--org-templates-dir))
   (setq md--org-weekly-review-template (expand-file-name "weekly-review.org" md--org-templates-dir))
 
@@ -234,9 +238,34 @@
   (expand-file-name
    (format "%s.org" (format-time-string "%Y-%m-%B")) md--org-reviews-dir))
 
+(defun md/get-planning-filename (&optional period plandate)
+  (or plandate (setq plandate (current-time)))
+  (or period (setq period 'week))
+  (format "%s.org" (pcase period
+                           ('week (format-time-string "%Y-W%V" plandate))
+                           ('day (format-time-string "%Y-%m-%d" plandate))
+                           ('month (format-time-string "%Y-%m-%B" plandate))
+                           ('year (format-time-string "%Y" plandate))
+                           )
+                )
+  )
+
+(defun md/get-planning-file (&optional period plandate)
+  (expand-file-name (md/get-planning-filename period plandate) md--org-plan-dir)
+  )
+
 (setq org-capture-templates
-      `(("p" "Project" entry (file md/get-project-name)
+      `(("p" "Planning")
+        ("pp" "Project" entry (file md/get-project-name)
          (file ,md--org-project-template))
+        ("py" "Yearly Plan" plain (file ,(md/get-planning-file 'year))
+         (file ,md--org-yearly-template) :time-prompt t)
+        ("pm" "Monthly Plan" plain (file ,(md/get-planning-file 'month))
+         (file ,md--org-monthly-template))
+        ("pw" "Weekly Plan" plain (file ,(md/get-planning-file 'week))
+         (file ,md--org-weekly-template) :tree-type week)
+        ("pd" "Daily Plan" plain (file ,(md/get-planning-file 'day))
+         (file ,md--org-daily-template) :tree-type day)
         ("t" "Task" entry (file+headline md--org-tasks "Tasks")
          "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
         ("r" "Review")
