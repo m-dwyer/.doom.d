@@ -1,4 +1,5 @@
-* Checklist
+* %<%Y-%m-%d>
+** Checklist
 - [ ] Action scheduled tasks
 - [ ] Capture any open loops into inbox
 - [ ] Confirm tomorrow's scheduled tasks

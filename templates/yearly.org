@@ -1,28 +1,41 @@
 #+TITLE:%<%Y> Yearly Planner
 
-* Vision
-The big over-arching vision of year.
-
+* Yearly Overview
 #+BEGIN_QUOTE
+The big over-arching vision for the year
 Vision is the reason you do what you do.  It's what you want to see happen in the world, and in your life.  Provides guidance for your yearly planning.
 #+END_QUOTE
 
 %?
 
-* Planning
+* Yearly Planning
+#+BEGIN_QUOTE
+How do I work towards my yearly vision?  Which goals will achieve this, and how should I work towards these goals over each quarter of the year?
+#+END_QUOTE
+
 ** Quarter 1
 *** Goals
-*** Wins, Highs
-*** Lows, Challenges
 ** Quarter 2
 *** Goals
-*** Wins, Highs
-*** Lows, Challenges
 ** Quarter 3
 *** Goals
-*** Wins, Highs
-*** Lows, Challenges
 ** Quarter 4
 *** Goals
+
+* Yearly Review
+#+BEGIN_QUOTE
+What went well?  Not so well? Lessons?
+#+END_QUOTE
+
+** Quarter 1 Review
+*** Wins, Highs
+*** Lows, Challenges
+** Quarter 2 Review
+*** Wins, Highs
+*** Lows, Challenges
+** Quarter 3 Review
+*** Wins, Highs
+*** Lows, Challenges
+** Quarter 4 Review
 *** Wins, Highs
 *** Lows, Challenges

@@ -1,5 +1,19 @@
 #+TITLE: Week
-* Focus
-%?
 
-* Dailies
+* Weekly Overview
+
+* Weekly Planning
+** Dailies
+* Weekly Review
+** Get Clear
+- [ ] Empty your head - new projects, tasks, etc %?
+- [ ] Clean out inbox - refile to incubate.org, delete, create project, etc
+
+** Get Current
+- [ ] Review previous & upcoming calendar
+- [ ] Review todo list
+- [ ] Review projects
+
+** Get Creative
+- [ ] Review someday/maybe list in incubate.org
+- [ ] Any new, wonderful, harebrained, creative, thought-provoking, risk-taking ideas to capture?

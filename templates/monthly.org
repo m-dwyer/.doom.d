@@ -1,9 +1,13 @@
 #+TITLE:  %(format-time-string "%B %Y")
 #+GOALS:
 
-* Month Overview
+* Monthly Overview
 
 %?
+
+* Monthly Planning
+** Primary goal / focus
+** Other goal(s) / focus
 
 * Monthly Review
 ** Review and update Goals

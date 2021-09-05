@@ -264,7 +264,7 @@
          (file ,md--org-monthly-template))
         ("pw" "Weekly Plan" plain (file ,(md/get-planning-file 'week))
          (file ,md--org-weekly-template) :tree-type week)
-        ("pd" "Daily Plan" entry (file+olp+datetree ,(md/get-planning-file 'week) "Dailies")
+        ("pd" "Daily Plan" entry (file+olp ,(md/get-planning-file 'week) "Weekly Planning" "Dailies")
          (file ,md--org-daily-template) :time-prompt t :tree-type day)
         ("t" "Task" entry (file+headline md--org-tasks "Tasks")
          "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
