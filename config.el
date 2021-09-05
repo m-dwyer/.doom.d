@@ -243,7 +243,7 @@
   (or period (setq period 'week))
   (format "%s.org" (pcase period
                            ('day (format-time-string "%Y-%m-%d" plandate))
-                           ('week (format-time-string "%Y-W%V" plandate))
+                           ('week (format-time-string "%Y-%m-%B-W%V" plandate))
                            ('month (format-time-string "%Y-%m-%B" plandate))
                            ('year (format-time-string "%Y" plandate))
                            )
