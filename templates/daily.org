@@ -1,4 +1,4 @@
-* %<%Y-%m-%d>
+* %^{Day}t
 ** Checklist
 - [ ] Action scheduled tasks
 - [ ] Capture any open loops into inbox
