@@ -267,10 +267,7 @@
         ("pd" "Daily Plan" entry (file+olp ,(md/get-planning-file 'week) "Weekly Planning" "Dailies")
          (file ,md--org-daily-template))
         ("t" "Task" entry (file+headline md--org-tasks "Tasks")
-         "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
-        ("r" "Review")
-        ("rw" "Weekly Review" entry (file+olp+datetree md/get-current-review-name)
-         (file ,md--org-weekly-review-template) :tree-type week)))
+         "* TODO %?\n %U\n %a\n %i" :empty-lines 1)))
 
 (use-package! org-edna
   :hook
