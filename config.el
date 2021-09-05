@@ -147,15 +147,6 @@
     '(org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
     '(org-checkbox nil :inherit 'fixed-pitch)))
 
-(use-package! org-journal
-  :after org
-  :config
-  (setq org-journal-dir md--org-journal-dir)
-  (setq org-journal-file-type 'weekly)
-  (setq org-journal-date-format "%A, %d %B %Y")
-  (setq org-journal-file-format "%Y-W%V.org")
-  (setq org-journal-file-header "#+TITLE: Weekly Journal W%V\n#+STARTUP: folded"))
-
 (use-package! org-super-agenda
   :after org-agenda
   :init
@@ -282,3 +273,12 @@
          )
         "%s_archive::datetree/")
 )
+
+(use-package! org-journal
+  :after org
+  :config
+  (setq org-journal-dir md--org-journal-dir)
+  (setq org-journal-file-type 'weekly)
+  (setq org-journal-date-format "%A, %d %B %Y")
+  (setq org-journal-file-format (md/get-planning-filename 'week))
+  (setq org-journal-file-header "#+TITLE: Weekly Journal W%V\n#+STARTUP: folded"))
