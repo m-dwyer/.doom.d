@@ -229,7 +229,7 @@
   :config
   (org-super-agenda-mode))
 
-(defun md/get-project-name ()
+(defun md/get-project-filename ()
   (setq md--org-capture-project (read-string "Project name:"))
   (expand-file-name
    (format "%s.org" (s-dashed-words md--org-capture-project)) md--org-projects-dir))
@@ -256,7 +256,7 @@
 
 (setq org-capture-templates
       `(("p" "Planning")
-        ("pp" "Project" entry (file md/get-project-name)
+        ("pp" "Project" entry (file md/get-project-filename)
          (file ,md--org-project-template))
         ("py" "Yearly Plan" plain (file ,(md/get-planning-file 'year))
          (file ,md--org-yearly-template) :time-prompt t)
