@@ -1,4 +1,4 @@
-#+TITLE: Week
+#+TITLE: %(format-time-string "W%W, %B")
 
 * Weekly Overview
 
@@ -16,6 +16,6 @@
 *** Get Creative
 - [ ] Review someday/maybe list in incubate.org
 - [ ] Any new, wonderful, harebrained, creative, thought-provoking, risk-taking ideas to capture?
-** Tasks
+** Clocked Tasks
 #+BEGIN: clocktable :properties ("Effort") :scope agenda-with-archives :block %(format-time-string "%Y-W%W") :stepskip0 t :fileskip0 t :formula "@1$2=string(\"Est. effort\")::@1$4=string(\"Time\")"
 #+END: clocktable
