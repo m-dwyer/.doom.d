@@ -25,5 +25,5 @@
 *** Review Someday/Maybe Items
 - [ ] Promote any that I might consider as next actions or projects
 ** Clocked Tasks
-#+BEGIN: clocktable :properties ("Effort") :indent nil :scope agenda-with-archives :block %(format-time-string "%Y-%m") :stepskip0 t :fileskip0 t :formula "@1$2=string(\"Est. effort\")::@1$4=string(\"Time\")"
+#+BEGIN: clocktable :properties ("Effort") :hidefiles t :tcolumns 2 :indent t :maxlevels 4 :scope agenda-with-archives :block %(format-time-string "%Y-%m") :stepskip0 t :fileskip0 t :formula "@1$2=string(\"Task\")"
 #+END: clocktable
