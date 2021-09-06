@@ -17,7 +17,7 @@ DEADLINE: %^t
 %?
 
 ** Clocked Tasks
-#+BEGIN: clocktable :properties ("Effort") :scope file :stepskip0 t :fileskip0 t :formula "@1$2=string(\"Est. effort\")::@1$4=string(\"Time\")"
+#+BEGIN: clocktable :properties ("Effort") :scope file :stepskip0 t :fileskip0 t :indent nil :formula "@1$2=string(\"Est. effort\")::@1$4=string(\"Time\")"
 #+END: clocktable
 
 ** Project  Tasks [0/2] [0%]
