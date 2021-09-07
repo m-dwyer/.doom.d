@@ -1,4 +1,4 @@
-#+TITLE: %(format-time-string "W%W, %B")
+#+TITLE:  %(format-time-string "W%W, %B %Y" (md/prompt-date "Week:" 'date-week))
 
 * Weekly Overview
 

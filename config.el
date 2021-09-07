@@ -245,6 +245,11 @@
   (expand-file-name (md/get-planning-filename period plandate) md--org-plan-dir)
   )
 
+(defun md/prompt-date (prompt variable)
+  (make-local-variable variable)
+  (set variable (org-read-date nil 'to-time nil prompt))
+  )
+
 (setq org-capture-templates
       `(("p" "Planning")
         ("pp" "Project" entry (file md/get-project-filename)

@@ -1,4 +1,4 @@
-* Project Name :project:
+* %(progn md--org-capture-project) :project:
 DEADLINE: %^t
 :PROPERTIES:
 :STARTDATE: %u
