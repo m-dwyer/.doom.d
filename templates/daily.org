@@ -1,4 +1,4 @@
-* %^{Day}t
+* %(format-time-string "%Y-%m-%d" (progn md--org-planning-day))
 ** Daily Checklist
 - [ ] Action scheduled tasks
 - [ ] Capture any open loops into inbox

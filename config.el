@@ -246,21 +246,24 @@
   )
 
 (defun md/prompt-date (prompt variable)
-  (make-local-variable variable)
-  (set variable (org-read-date nil 'to-time nil prompt))
-  )
+  (set variable (org-read-date nil 'to-time nil prompt)))
 
 (setq org-capture-templates
       `(("p" "Planning")
         ("pp" "Project" entry (file md/get-project-filename)
          (file ,md--org-project-template))
-        ("py" "Yearly Plan" plain (file ,(md/get-planning-file 'year))
-         (file ,md--org-yearly-template) :time-prompt t)
-        ("pm" "Monthly Plan" plain (file ,(md/get-planning-file 'month))
+        ("py" "Yearly Plan" plain
+         (file (lambda() (md/get-planning-file 'year (md/prompt-date "Year:" 'md--org-planning-year))))
+         (file ,md--org-yearly-template))
+        ("pm" "Monthly Plan" plain
+         (file (lambda() (md/get-planning-file 'month (md/prompt-date "Month:" 'md--org-planning-month))))
          (file ,md--org-monthly-template))
-        ("pw" "Weekly Plan" plain (file ,(md/get-planning-file 'week))
+        ("pw" "Weekly Plan" plain
+         (file (lambda () (md/get-planning-file 'week (md/prompt-date "Week:" 'md--org-planning-week))))
          (file ,md--org-weekly-template))
-        ("pd" "Daily Plan" entry (file+olp ,(md/get-planning-file 'week) "Weekly Planning" "Dailies")
+        ("pd" "Daily Plan" entry
+         (file+olp (lambda () (md/get-planning-file 'week (md/prompt-date "Day:" 'md--org-planning-day)))
+          "Weekly Planning" "Dailies")
          (file ,md--org-daily-template))
         ("t" "Task" entry (file+headline md--org-tasks "Tasks")
          "* TODO %?\n %U\n %a\n %i" :empty-lines 1)))

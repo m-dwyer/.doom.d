@@ -1,4 +1,4 @@
-#+TITLE:%<%Y> Yearly Planner
+#+TITLE:  %(format-time-string "%Y" (progn md--org-planning-year))
 
 * Yearly Overview
 #+BEGIN_QUOTE
