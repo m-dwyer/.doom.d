@@ -21,9 +21,9 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "JetBrains Mono" :size 30)
-      doom-variable-pitch-font (font-spec :family "Cantarell" :size 30)
-      doom-big-font (font-spec :family "JetBrains Mono" :size 44))
+(setq doom-font (font-spec :family "JetBrains Mono" :size 16)
+      doom-variable-pitch-font (font-spec :family "Cantarell" :size 16)
+      doom-big-font (font-spec :family "JetBrains Mono" :size 22))
 
 (setq org-hide-emphasis-markers t)
 
@@ -86,7 +86,6 @@
 
   (setq md--org-templates-dir (expand-file-name "templates" doom-private-dir))
   (setq md--org-journal-dir (expand-file-name "journal" org-directory))
-  (setq md--org-reviews-dir (expand-file-name "reviews" org-directory))
   (setq md--org-projects-dir (expand-file-name "projects" org-directory))
   (setq md--org-archive-dir (expand-file-name "archive" org-directory))
   (setq md--org-plan-dir (expand-file-name "plan" org-directory))
@@ -95,7 +94,6 @@
   (setq md--org-weekly-template (expand-file-name "weekly.org" md--org-templates-dir))
   (setq md--org-daily-template (expand-file-name "daily.org" md--org-templates-dir))
   (setq md--org-project-template (expand-file-name "project.org" md--org-templates-dir))
-  (setq md--org-weekly-review-template (expand-file-name "weekly-review.org" md--org-templates-dir))
 
   (setq md--org-tasks (expand-file-name "tasks.org" org-directory))
   (setq md--org-recurring-tasks (expand-file-name "recurring.org" org-directory))
@@ -224,10 +222,6 @@
   (setq md--org-capture-project (read-string "Project name:"))
   (expand-file-name
    (format "%s.org" (s-dashed-words md--org-capture-project)) md--org-projects-dir))
-
-(defun md/get-current-review-name ()
-  (expand-file-name
-   (format "%s.org" (format-time-string "%Y-%m-%B")) md--org-reviews-dir))
 
 (defun md/get-planning-filename (&optional period plandate)
   (or plandate (setq plandate (current-time)))
