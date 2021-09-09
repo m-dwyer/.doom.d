@@ -1,6 +1,10 @@
 * %(format-time-string "%Y-%m-%d" (progn md--org-planning-day))
 ** Daily Checklist
-- [ ] Action scheduled tasks
+- [ ] Action or reschedule overdue tasks
+- [ ] Action scheduled tasks (clock in and out!)
+- [ ] Action listed habits
 - [ ] Capture any open loops into inbox
 - [ ] Confirm tomorrow's scheduled tasks
-- [ ] Clock out of tasks
+- [ ] Action low effort / NEXT tasks if time
+- [ ] Ensure clocked out of any tasks
+- [ ] Create at least one journal entry
