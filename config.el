@@ -95,6 +95,7 @@
   (setq md--org-daily-template (expand-file-name "daily.org" md--org-templates-dir))
   (setq md--org-project-template (expand-file-name "project.org" md--org-templates-dir))
 
+  (setq md--org-goals (expand-file-name "goals.org" org-directory))
   (setq md--org-tasks (expand-file-name "tasks.org" org-directory))
   (setq md--org-recurring-tasks (expand-file-name "recurring.org" org-directory))
   (setq md--org-incubate (expand-file-name "incubate.org" org-directory))
@@ -102,13 +103,14 @@
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
-  (setq org-agenda-files `(,md--org-tasks ,md--org-recurring-tasks ,md--org-projects-dir))
+  (setq org-agenda-files `(,md--org-goals ,md--org-tasks ,md--org-recurring-tasks ,md--org-projects-dir))
 
   (setq org-enforce-todo-dependencies t)
 
   (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w)" "|" "DONE(d!)" "CANCELLED(c)")
         (sequence "RECURRING" "|" "DONE")
+        (sequence "GOAL" "|" "GDONE")
         ))
 
   (setq org-tags-exclude-from-inheritance '("project"))
@@ -144,6 +146,13 @@
     '(org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
     '(org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
     '(org-checkbox nil :inherit 'fixed-pitch)))
+
+(setq org-tag-alist '((:startgrouptag)
+                      ("Goal")
+                      (:grouptags)
+                      ("{G@.+}")
+                      (:endgrouptag)))
+
 
 (use-package! org-super-agenda
   :after org-agenda
