@@ -222,8 +222,13 @@
             )
             )
            )
-          )
-        )
+          ("m" "Month view"
+           ((tags-todo "+Goal" ((org-agenda-overriding-header "Goals")
+                         (org-agenda-span 'month)
+                        )
+                    )
+           ))
+          ))
   :config
   (org-super-agenda-mode))
 
