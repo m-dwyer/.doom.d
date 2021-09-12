@@ -109,8 +109,8 @@
 
   (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w)" "|" "DONE(d!)" "CANCELLED(c)")
-        (sequence "RECURRING" "|" "DONE")
-        (sequence "GOAL" "|" "GDONE")
+        (sequence "RECURRING" "|" "RECURDONE")
+        (sequence "GOAL" "|" "ACHIEVED")
         ))
 
   (setq org-tags-exclude-from-inheritance '("project"))
