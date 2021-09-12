@@ -153,7 +153,6 @@
                       ("{G@.+}")
                       (:endgrouptag)))
 
-
 (use-package! org-super-agenda
   :after org-agenda
   :init
@@ -222,9 +221,31 @@
             )
             )
            )
-          ("m" "Month view"
-           ((tags-todo "+Goal" ((org-agenda-overriding-header "Goals")
-                         (org-agenda-span 'month)
+          ("p" . "Planning")
+          ("pm" "Month view"
+           (
+            (tags-todo "+Goal" ((org-agenda-overriding-header "Goals")
+                        )
+                    )
+            (agenda "" ((org-agenda-span 'month)
+                        (org-agenda-start-day "01")
+                        (org-super-agenda-groups
+                         '((:discard (:todo "GOAL"))
+                           (:discard (:todo "RECURRING"))
+                           (:scheduled t))
+                         )
+                        )
+                    )
+            (todo "" ((org-agenda-overriding-header "Things to schedule")
+                        (org-super-agenda-groups
+                         '((:name "Individual tasks"
+                            :file-path "task"
+                           )
+                           (:name "Next tasks"
+                            :todo "NEXT"
+                            )
+                           (:discard (:anything t)))
+                         )
                         )
                     )
            ))
