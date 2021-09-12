@@ -1,4 +1,4 @@
-* %(format-time-string "%Y-%m-%d" (progn md--org-planning-day))
+* %(format-time-string "%Y-%m-%d" (progn md--org-capture-planning-day))
 ** Daily Checklist
 - [ ] Action or reschedule overdue tasks
 - [ ] Action scheduled tasks (clock in and out!)

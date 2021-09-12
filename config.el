@@ -89,11 +89,13 @@
   (setq md--org-projects-dir (expand-file-name "projects" org-directory))
   (setq md--org-archive-dir (expand-file-name "archive" org-directory))
   (setq md--org-plan-dir (expand-file-name "plan" org-directory))
+  (setq md--org-areas-dir (expand-file-name "areas" org-directory))
   (setq md--org-yearly-template (expand-file-name "yearly.org" md--org-templates-dir))
   (setq md--org-monthly-template (expand-file-name "monthly.org" md--org-templates-dir))
   (setq md--org-weekly-template (expand-file-name "weekly.org" md--org-templates-dir))
   (setq md--org-daily-template (expand-file-name "daily.org" md--org-templates-dir))
   (setq md--org-project-template (expand-file-name "project.org" md--org-templates-dir))
+  (setq md--org-area-template (expand-file-name "area.org" md--org-templates-dir))
 
   (setq md--org-goals (expand-file-name "goals.org" org-directory))
   (setq md--org-tasks (expand-file-name "tasks.org" org-directory))
@@ -253,10 +255,20 @@
   :config
   (org-super-agenda-mode))
 
-(defun md/get-project-filename ()
-  (setq md--org-capture-project (read-string "Project name:"))
+(defun md/prompt-date (prompt variable)
+  (set variable (org-read-date nil 'to-time nil prompt)))
+
+(defun md/prompt-string (prompt variable)
+  (set variable (read-string prompt))
+  )
+
+(defun md/get-project-filename (name)
   (expand-file-name
-   (format "%s.org" (s-dashed-words md--org-capture-project)) md--org-projects-dir))
+   (format "%s.org" (s-dashed-words name)) md--org-projects-dir))
+
+(defun md/get-area-filename (name)
+  (expand-file-name
+   (format "%s.org" (s-dashed-words name)) md--org-areas-dir))
 
 (defun md/get-planning-filename (&optional period plandate)
   (or plandate (setq plandate (current-time)))
@@ -274,24 +286,25 @@
   (expand-file-name (md/get-planning-filename period plandate) md--org-plan-dir)
   )
 
-(defun md/prompt-date (prompt variable)
-  (set variable (org-read-date nil 'to-time nil prompt)))
-
 (setq org-capture-templates
       `(("p" "Planning")
-        ("pp" "Project" entry (file md/get-project-filename)
+        ("pa" "Area" plain
+         (file (lambda () (md/get-area-filename (md/prompt-string "Area Name:" 'md--org-capture-area))))
+         (file ,md--org-area-template))
+        ("pp" "Project" entry
+         (file (lambda () (md/get-project-filename (md/prompt-string "Project Name": 'md--org-capture-project))))
          (file ,md--org-project-template))
         ("py" "Yearly Plan" plain
-         (file (lambda() (md/get-planning-file 'year (md/prompt-date "Year:" 'md--org-planning-year))))
+         (file (lambda() (md/get-planning-file 'year (md/prompt-date "Year:" 'md--org-capture-planning-year))))
          (file ,md--org-yearly-template))
         ("pm" "Monthly Plan" plain
-         (file (lambda() (md/get-planning-file 'month (md/prompt-date "Month:" 'md--org-planning-month))))
+         (file (lambda() (md/get-planning-file 'month (md/prompt-date "Month:" 'md--org-capture-planning-month))))
          (file ,md--org-monthly-template))
         ("pw" "Weekly Plan" plain
-         (file (lambda () (md/get-planning-file 'week (md/prompt-date "Week:" 'md--org-planning-week))))
+         (file (lambda () (md/get-planning-file 'week (md/prompt-date "Week:" 'md--org-capture-planning-week))))
          (file ,md--org-weekly-template))
         ("pd" "Daily Plan" entry
-         (file+olp (lambda () (md/get-planning-file 'week (md/prompt-date "Day:" 'md--org-planning-day)))
+         (file+olp (lambda () (md/get-planning-file 'week (md/prompt-date "Day:" 'md--org-capture-planning-day)))
           "Weekly Planning" "Dailies")
          (file ,md--org-daily-template))
         ("t" "Task" entry (file+headline md--org-tasks "Tasks")

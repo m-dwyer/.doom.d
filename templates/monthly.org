@@ -1,4 +1,4 @@
-#+TITLE:  %(format-time-string "%B %Y" (progn md--org-planning-month))
+#+TITLE:  %(format-time-string "%B %Y" (progn md--org-capture-planning-month))
 #+GOALS:
 
 * Monthly Overview
