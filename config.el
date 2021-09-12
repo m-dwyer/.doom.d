@@ -153,6 +153,11 @@
                       ("Goal")
                       (:grouptags)
                       ("{G@.+}")
+                      (:endgrouptag)
+                      (:startgrouptag)
+                      ("Area")
+                      (:grouptags)
+                      ("{A@.+}")
                       (:endgrouptag)))
 
 (use-package! org-super-agenda

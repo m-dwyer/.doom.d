@@ -1,5 +1,25 @@
-* %(progn md--org-capture-area) :A@:
+#+TITLE: %(progn md--org-capture-area)
+
+* %(progn md--org-capture-area) :A@%(s-snake-case (progn md--org-capture-area)):
 
 ** Area Overview
+
 %?
 
+** Associated Goals
+Unfinished elisp to get Goals from goals file with this area tag
+#+BEGIN_SRC elisp :results replace
+(let ((all-tags '())
+(org-map-entries
+ (lambda ()
+   insert (org-get-tags)
+   )
+ ))
+(mapconcat
+ (lamba (x) ((format "%s") "1"))
+ (all-tags)
+ "\n"
+))
+#+END_SRC
+
+#+RESULTS:
