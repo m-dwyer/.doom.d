@@ -297,7 +297,7 @@
          (file (lambda () (md/get-area-filename (md/prompt-string "Area Name:" 'md--org-capture-area))))
          (file ,md--org-area-template))
         ("pp" "Project" entry
-         (file (lambda () (md/get-project-filename (md/prompt-string "Project Name": 'md--org-capture-project))))
+         (file (lambda () (md/get-project-filename (md/prompt-string "Project Name:" 'md--org-capture-project))))
          (file ,md--org-project-template))
         ("py" "Yearly Plan" plain
          (file (lambda() (md/get-planning-file 'year (md/prompt-date "Year:" 'md--org-capture-planning-year))))
