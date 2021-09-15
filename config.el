@@ -170,6 +170,10 @@
                         (org-agenda-start-day nil)
                         ;; always show timelines!
                         (org-agenda-time-grid '((daily today) (800 1000 1200 1400 1600 1800 2000) "......" "----------------"))
+                        (org-agenda-prefix-format '((agenda . " %i %?-12t%-6e% s")
+                                                     (todo . " %i %-6e")
+                                                     (tags . " %i %-12:c")
+                                                     (search . " %i")))
                         (org-super-agenda-groups
                          '((:name "Scheduled Today"
                             :time-grid t
@@ -191,10 +195,10 @@
                         )
                     )
             (alltodo "" ((org-agenda-overriding-header "")
-                         (org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t%-6e% s")
-                                                     (todo . " %i %-12:c %-6e")
+                         (org-agenda-prefix-format '((agenda . " %i %?-12t%-6e% s")
+                                                     (todo . " %i %-6e")
                                                      (tags . " %i %-12:c")
-                                                     (search . " %i %-12:c")))
+                                                     (search . " %i")))
                          (org-super-agenda-groups
                           '((:name "Low Effort (<= 15 min)"
                              :and (:effort< "0:16")
