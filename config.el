@@ -172,6 +172,8 @@
 (use-package! org-super-agenda
   :after org-agenda
   :init
+  (setq org-agenda-skip-scheduled-if-done t)
+  (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-custom-commands
         '(("t" "Today view"
            ((agenda "" ((org-agenda-overriding-header "")
