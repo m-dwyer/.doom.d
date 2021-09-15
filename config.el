@@ -110,8 +110,17 @@
   (setq org-enforce-todo-dependencies t)
 
   (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w)" "|" "DONE(d!)" "CANCELLED(c)")
-        (sequence "RECURRING" "|" "RECURDONE")
+      '((sequence
+         "TODO(t)" ;; Task to be done at some point, not yet planned
+         "NEXT(n)" ;; Next actionable item to surface on agenda and do
+         "DOING(s)" ;; In progress
+         "WAIT(w)" ;; Waiting on someone / some external blocker
+         "HOLD(h)" ;; Paused by me
+         "|"
+         "DONE(d!)" ;; Task completed
+         "CANCEL(c)" ;; No longer actioning
+         )
+        (sequence "RECUR" "|" "RDONE")
         (sequence "GOAL" "|" "ACHIEVED")
         ))
 
