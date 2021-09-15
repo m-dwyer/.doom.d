@@ -179,12 +179,14 @@
                             :habit t
                             :date today
                             :order 2)
-                           (:name "Overdue (past scheduled/deadline)"
+                           (:name "Overdue"
                             :deadline past
-                            :scheduled past
                             :order 3)
-                           (:discard (:anything t))
-                           )
+                           (:name "Ongoing"
+                            :scheduled past
+                            :order 4
+                            )
+                           (:discard (:anything t)))
                          )
                         )
                     )
