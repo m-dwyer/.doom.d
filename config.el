@@ -82,8 +82,6 @@
 
 (use-package! org
   :config
-  (setq org-ellipsis " ▾")
-
   (setq md--org-templates-dir (expand-file-name "templates" doom-private-dir))
   (setq md--org-journal-dir (expand-file-name "journal" org-directory))
   (setq md--org-projects-dir (expand-file-name "projects" org-directory))
@@ -101,6 +99,8 @@
   (setq md--org-tasks (expand-file-name "tasks.org" org-directory))
   (setq md--org-recurring-tasks (expand-file-name "recurring.org" org-directory))
   (setq md--org-incubate (expand-file-name "incubate.org" org-directory))
+
+  (setq org-ellipsis " ▾")
 
   (setq org-startup-folded 'fold)
 
