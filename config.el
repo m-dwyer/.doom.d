@@ -257,7 +257,7 @@
                         (org-agenda-start-day "01")
                         (org-super-agenda-groups
                          '((:discard (:todo "GOAL"))
-                           (:discard (:todo "RECURRING"))
+                           (:discard (:todo "RECUR"))
                            (:scheduled t))
                          )
                         )
