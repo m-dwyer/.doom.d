@@ -102,6 +102,8 @@
   (setq md--org-recurring-tasks (expand-file-name "recurring.org" org-directory))
   (setq md--org-incubate (expand-file-name "incubate.org" org-directory))
 
+  (setq org-startup-folded 'fold)
+
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
