@@ -221,6 +221,8 @@
            ((agenda "" ((org-agenda-overriding-header "Week view")
                         (org-agenda-span 'week)
                         (org-agenda-start-on-weekday 1)
+                        (org-agenda-time-grid '(nil (800 1000 1200 1400 1600 1800 2000) "" "----------------"))
+                        (org-agenda-prefix-format '((agenda . " %i %?-12t%-6e% s")))
                         )
                 )
             (alltodo "" ((org-agenda-overriding-header "")
