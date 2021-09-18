@@ -1,0 +1,9 @@
+* SOMEDAY Book: %^{Author} - %^{Title} :book:
+  :PROPERTIES:
+  :Author: %\1
+  :Title:  %\2
+  :END:
+  - Recommended by: %?
+  :LOGBOOK:
+  - Added: %U
+  :END:

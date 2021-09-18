@@ -94,12 +94,13 @@
   (setq md--org-daily-template (expand-file-name "daily.org" md--org-templates-dir))
   (setq md--org-project-template (expand-file-name "project.org" md--org-templates-dir))
   (setq md--org-area-template (expand-file-name "area.org" md--org-templates-dir))
+  (setq md--org-book-template (expand-file-name "book.org" md--org-templates-dir))
 
   (setq md--org-inbox (expand-file-name "inbox.org" org-directory))
   (setq md--org-goals (expand-file-name "goals.org" org-directory))
   (setq md--org-tasks (expand-file-name "tasks.org" org-directory))
   (setq md--org-recurring-tasks (expand-file-name "recurring.org" org-directory))
-  (setq md--org-incubate (expand-file-name "incubate.org" org-directory))
+  (setq md--org-someday (expand-file-name "someday.org" org-directory))
 
   (setq org-ellipsis " ▾")
 
@@ -335,6 +336,9 @@
          "* TODO %?\n:LOGBOOK:\n-Added: %U\n:END:\n%a\n %i" :empty-lines 1)
         ("n" "Note" entry (file+headline md--org-inbox "Inbox")
          "* Note (%a)\n %U\n\n %?")
+        ("r" "Resources")
+        ("rb" "Book" entry (file+headline md--org-someday "Someday")
+         (file ,md--org-book-template))
         ))
 
 (use-package! org-edna
