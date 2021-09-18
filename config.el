@@ -26,6 +26,7 @@
       doom-big-font (font-spec :family "JetBrains Mono" :size 22))
 
 (setq org-hide-emphasis-markers t)
+(setq org-hide-leading-stars t)
 
 (add-hook! 'org-mode-hook (lambda ()  (org-superstar-mode 1)))
 
