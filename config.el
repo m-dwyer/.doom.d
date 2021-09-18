@@ -95,6 +95,7 @@
   (setq md--org-project-template (expand-file-name "project.org" md--org-templates-dir))
   (setq md--org-area-template (expand-file-name "area.org" md--org-templates-dir))
 
+  (setq md--org-inbox (expand-file-name "inbox.org" org-directory))
   (setq md--org-goals (expand-file-name "goals.org" org-directory))
   (setq md--org-tasks (expand-file-name "tasks.org" org-directory))
   (setq md--org-recurring-tasks (expand-file-name "recurring.org" org-directory))
@@ -331,7 +332,10 @@
           "Weekly Planning" "Dailies")
          (file ,md--org-daily-template))
         ("t" "Task" entry (file+headline md--org-tasks "Tasks")
-         "* TODO %?\n %U\n %a\n %i" :empty-lines 1)))
+         "* TODO %?\n:LOGBOOK:\n-Added: %U\n:END:\n%a\n %i" :empty-lines 1)
+        ("n" "Note" entry (file+headline md--org-inbox "Inbox")
+         "* Note (%a)\n %U\n\n %?")
+        ))
 
 (use-package! org-edna
   :hook
