@@ -21,9 +21,9 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "JetBrains Mono" :size 16)
-      doom-variable-pitch-font (font-spec :family "Cantarell" :size 16)
-      doom-big-font (font-spec :family "JetBrains Mono" :size 22))
+(setq doom-font (font-spec :family "JetBrains Mono" :size 32)
+      doom-variable-pitch-font (font-spec :family "Cantarell" :size 32)
+      doom-big-font (font-spec :family "JetBrains Mono" :size 44))
 
 (setq org-hide-emphasis-markers t)
 (setq org-hide-leading-stars t)
@@ -90,6 +90,7 @@
   (setq md--org-archive-dir (expand-file-name "archive" org-directory))
   (setq md--org-plan-dir (expand-file-name "plan" org-directory))
   (setq md--org-areas-dir (expand-file-name "areas" org-directory))
+  (setq md--org-resources-dir (expand-file-name "resources" org-directory))
   (setq md--org-yearly-template (expand-file-name "yearly.org" md--org-templates-dir))
   (setq md--org-monthly-template (expand-file-name "monthly.org" md--org-templates-dir))
   (setq md--org-weekly-template (expand-file-name "weekly.org" md--org-templates-dir))
@@ -97,6 +98,8 @@
   (setq md--org-project-template (expand-file-name "project.org" md--org-templates-dir))
   (setq md--org-area-template (expand-file-name "area.org" md--org-templates-dir))
   (setq md--org-book-template (expand-file-name "book.org" md--org-templates-dir))
+
+  (setq md--org-book-note-template (expand-file-name "book-note.org" md--org-templates-dir))
 
   (setq md--org-inbox (expand-file-name "inbox.org" org-directory))
   (setq md--org-goals (expand-file-name "goals.org" org-directory))
@@ -214,7 +217,8 @@
                                                      (tags . " %i %-12:c")
                                                      (search . " %i")))
                          (org-super-agenda-groups
-                          '((:name "Low Effort (<= 15 min)"
+                          '((:discard (:scheduled today))
+                            (:name "Low Effort (<= 15 min)"
                              :and (:effort< "0:16")
                              :order 1)
                             (:name "Next Tasks"
@@ -365,3 +369,22 @@
   (setq org-journal-date-format "%A, %d %B %Y")
   (setq org-journal-file-format (md/get-planning-filename 'week))
   (setq org-journal-file-header "#+TITLE: Weekly Journal W%V\n#+STARTUP: folded"))
+
+(use-package! org-roam
+  :config
+  (setq org-roam-directory md--org-resources-dir)
+  (setq org-roam-capture-templates
+        '(("d" "default" plain "%?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+title: ${title}\n")
+           :unnarrowed t)
+          ("b" "Book Notes" plain "%?"
+           :if-new (file+head "notes/%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+title: ${title}\n#+filetags: book\n")
+           :unnarrowed t)
+          ("s" "Study Notes" plain "%?"
+           :if-new (file+head "studies/%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+title: ${title}\n#+filetags: study\n")
+           :unnarrowed t))
+        )
+  )

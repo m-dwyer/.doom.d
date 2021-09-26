@@ -1,0 +1,6 @@
+#+title: ${title}
+#+filetags: book
+
+* Summary
+%?
+* Learnings
