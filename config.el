@@ -374,13 +374,12 @@
   :config
   (setq org-roam-directory md--org-resources-dir)
   (setq org-roam-capture-templates
-        '(("d" "default" plain "%?"
+        `(("d" "default" plain "%?"
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                               "#+title: ${title}\n")
            :unnarrowed t)
-          ("b" "Book Notes" plain "%?"
-           :if-new (file+head "notes/%<%Y%m%d%H%M%S>-${slug}.org"
-                              "#+title: ${title}\n#+filetags: book\n")
+          ("b" "Book Notes" plain (file ,md--org-book-note-template)
+           :target (file "notes/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
           ("s" "Study Notes" plain "%?"
            :if-new (file+head "studies/%<%Y%m%d%H%M%S>-${slug}.org"
