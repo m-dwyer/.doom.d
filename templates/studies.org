@@ -1,0 +1,8 @@
+#+title: ${title}
+#+author: ${author}
+#+url:
+#+filetags: study
+
+* Summary
+%?
+* Learnings

@@ -97,9 +97,11 @@
   (setq md--org-daily-template (expand-file-name "daily.org" md--org-templates-dir))
   (setq md--org-project-template (expand-file-name "project.org" md--org-templates-dir))
   (setq md--org-area-template (expand-file-name "area.org" md--org-templates-dir))
-  (setq md--org-book-template (expand-file-name "book.org" md--org-templates-dir))
+
+  (setq md--org-someday-book-template (expand-file-name "someday-book.org" md--org-templates-dir))
 
   (setq md--org-book-note-template (expand-file-name "book-note.org" md--org-templates-dir))
+  (setq md--org-studies-template (expand-file-name "studies.org" md--org-templates-dir))
 
   (setq md--org-inbox (expand-file-name "inbox.org" org-directory))
   (setq md--org-goals (expand-file-name "goals.org" org-directory))
@@ -342,9 +344,9 @@
          "* TODO %?\n:LOGBOOK:\n-Added: %U\n:END:\n%a\n %i" :empty-lines 1)
         ("n" "Note" entry (file+headline md--org-inbox "Inbox")
          "* Note (%a)\n %U\n\n %?")
-        ("r" "Resources")
-        ("rb" "Book" entry (file+headline md--org-someday "Someday")
-         (file ,md--org-book-template))
+        ("s" "Someday")
+        ("sb" "Book" entry (file+headline md--org-someday "Someday")
+         (file ,md--org-someday-book-template))
         ))
 
 (use-package! org-edna
@@ -381,9 +383,8 @@
           ("b" "Book Notes" plain (file ,md--org-book-note-template)
            :target (file "notes/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
-          ("s" "Study Notes" plain "%?"
-           :if-new (file+head "studies/%<%Y%m%d%H%M%S>-${slug}.org"
-                              "#+title: ${title}\n#+filetags: study\n")
+          ("s" "Study Notes" plain (file ,md--org-studies-template)
+           :target (file "studies/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t))
         )
   )
