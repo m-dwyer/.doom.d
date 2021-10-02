@@ -1,8 +1,10 @@
 #+title: ${title}
 #+author: ${author}
 #+url:
-#+filetags: study
+#+filetags: course
 
 * Summary
 %?
+* Notes
+
 * Learnings

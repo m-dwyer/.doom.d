@@ -101,7 +101,7 @@
   (setq md--org-someday-book-template (expand-file-name "someday-book.org" md--org-templates-dir))
 
   (setq md--org-book-note-template (expand-file-name "book-note.org" md--org-templates-dir))
-  (setq md--org-studies-template (expand-file-name "studies.org" md--org-templates-dir))
+  (setq md--org-course-template (expand-file-name "course-note.org" md--org-templates-dir))
 
   (setq md--org-inbox (expand-file-name "inbox.org" org-directory))
   (setq md--org-goals (expand-file-name "goals.org" org-directory))
@@ -381,10 +381,10 @@
                               "#+title: ${title}\n")
            :unnarrowed t)
           ("b" "Book Notes" plain (file ,md--org-book-note-template)
-           :target (file "resources/notes/%<%Y%m%d%H%M%S>-${slug}.org")
+           :target (file "resources/books/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
-          ("s" "Study Notes" plain (file ,md--org-studies-template)
-           :target (file "resources/studies/%<%Y%m%d%H%M%S>-${slug}.org")
+          ("c" "Course Notes" plain (file ,md--org-course-template)
+           :target (file "resources/courses/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t))
         )
   )

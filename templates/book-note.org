@@ -1,6 +1,10 @@
 #+title: ${title}
+#+author: ${author}
+#+url:
 #+filetags: book
 
 * Summary
 %?
+* Notes
+
 * Learnings
