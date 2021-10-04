@@ -1,5 +1,7 @@
 (require 'dom)
 (require 'calibredb)
+(require 'calibredb-utils)
+(require 'calibredb-core)
 
 (defun get-annotations(book-id)
   (setq json (json-parse-string
@@ -45,7 +47,7 @@
   (with-temp-buffer
     (maphash
      (lambda (k v)
-       (insert k)
+       (insert (format "* %s" k))
        (insert "\n\n")
        (mapcar (lambda (arg)
                  (insert arg)
@@ -53,7 +55,21 @@
                (nreverse v))
        (insert "\n"))
      all-annotations)
-    (write-region (point-min) (point-max) "/Users/em.dwyer/another.org"))
+    (write-region (point-min) (point-max) (expand-file-name (format "books/%s.org" book-id) md--org-resources-dir))
+    )
   )
 
-(get-annotations "57")
+(defun get-book-id()
+  (setq my-calibre (calibredb-find-candidate-at-point))
+  (setq my-book-id (calibredb-getattr (car my-calibre) :id))
+  my-book-id
+  )
+
+(defun get-annotations-at-point()
+  (interactive)
+  (setq book-id (get-book-id))
+  (get-annotations book-id)
+  )
+
+
+(provide 'calibredb-annotations)
