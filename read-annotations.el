@@ -1,11 +1,11 @@
 (require 'dom)
 (require 'calibredb)
 
-(defun get-annotations()
+(defun get-annotations(book-id)
   (setq json (json-parse-string
               (calibredb-command :command "list"
-                                 :id "57"
-                                 :option "--for-machine --fields '*Annotations' -s id:57"
+                                 :id book-id
+                                 :option (format "--for-machine --fields '*Annotations' -s id:%s" book-id)
                                  :library (format "--library-path %s" (calibredb-root-dir-quote)))))
 
   (setq find-me (aref json 0))
@@ -56,4 +56,4 @@
     (write-region (point-min) (point-max) "/Users/em.dwyer/another.org"))
   )
 
-(get-annotations)
+(get-annotations "57")
