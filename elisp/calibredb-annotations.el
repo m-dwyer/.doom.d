@@ -43,6 +43,20 @@
                    (puthash current-chapter current-annotations all-annotations)
                    )))
           filtered-annotations)
+  all-annotations
+  )
+
+(defun get-book-id()
+  (let* ((book-candidate (calibredb-find-candidate-at-point))
+         (book-id (calibredb-getattr (car book-candidate) :id)))
+    book-id))
+
+(defun get-annotations-at-point()
+  (interactive)
+  (setq book-id (get-book-id))
+
+  (let ((books-dir (expand-file-name "books" md--org-resources-dir)))
+    (make-directory books-dir :parents))
 
   (with-temp-buffer
     (maphash
@@ -54,22 +68,10 @@
                  (insert "\n\n"))
                (nreverse v))
        (insert "\n"))
-     all-annotations)
-    (write-region (point-min) (point-max) (expand-file-name (format "books/%s.org" book-id) md--org-resources-dir))
-    )
-  )
-
-(defun get-book-id()
-  (setq my-calibre (calibredb-find-candidate-at-point))
-  (setq my-book-id (calibredb-getattr (car my-calibre) :id))
-  my-book-id
-  )
-
-(defun get-annotations-at-point()
-  (interactive)
-  (setq book-id (get-book-id))
-  (get-annotations book-id)
-  )
+     (get-annotations book-id))
+    (write-region (point-min) (point-max)
+     (expand-file-name
+      (format "books/%s.org" book-id) md--org-resources-dir))))
 
 
 (provide 'calibredb-annotations)
