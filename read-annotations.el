@@ -17,7 +17,7 @@
           (libxml-parse-html-region (point-min) (point-max))))
 
 
-  (setq filtered-anotations
+  (setq filtered-annotations
       (dom-search parsed-html
                   (lambda (node)
                     (cond ((and (eq (car node) 'td)
@@ -28,7 +28,7 @@
                           ))))
 
 
-  (setq all-annotations (make-hash-table))
+  (setq all-annotations (make-hash-table :test 'equal))
   (cl-map 'list
           (lambda (node)
             (cond ((eq (car node) 'td)
@@ -40,23 +40,20 @@
                    (add-to-list 'current-annotations current-paragraph)
                    (puthash current-chapter current-annotations all-annotations)
                    )))
-          filtered-anotations)
+          filtered-annotations)
 
-  (setq hash-out '())
   (with-temp-buffer
     (maphash
      (lambda (k v)
        (insert k)
        (insert "\n")
-       (mapcar (lambda (arg) (insert arg)) v)
-       (insert "\n\n")
-       )
+       (mapcar (lambda (arg)
+                 (insert arg)
+                 (insert "\n"))
+               (nreverse v))
+       (insert "\n"))
      all-annotations)
-    (write-region (point-min) (point-max) "/home/zara/test.org")
-    )
-
-  all-annotations
+    (write-region (point-min) (point-max) "/Users/em.dwyer/another.org"))
   )
 
 (get-annotations)
-
