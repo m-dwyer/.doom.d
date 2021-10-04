@@ -46,10 +46,10 @@
     (maphash
      (lambda (k v)
        (insert k)
-       (insert "\n")
+       (insert "\n\n")
        (mapcar (lambda (arg)
                  (insert arg)
-                 (insert "\n"))
+                 (insert "\n\n"))
                (nreverse v))
        (insert "\n"))
      all-annotations)
