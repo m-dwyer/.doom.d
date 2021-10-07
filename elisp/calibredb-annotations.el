@@ -13,11 +13,13 @@
   (setq find-me (aref json 0))
   (setq find-annotations (gethash "*annotations" find-me))
 
+  (if (eq find-annotations nil)
+      (error "Annotations for book not found"))
+
   (setq parsed-html
         (with-temp-buffer
           (insert find-annotations)
           (libxml-parse-html-region (point-min) (point-max))))
-
 
   (setq filtered-annotations
       (dom-search parsed-html
@@ -28,7 +30,6 @@
                           ((eq (car node) 'p)
                            t)
                           ))))
-
 
   (setq all-annotations (make-hash-table :test 'equal))
   (cl-map 'list
@@ -46,32 +47,17 @@
   all-annotations
   )
 
-(defun get-book-id()
+(defun get-book-metadata()
   (let* ((book-candidate (calibredb-find-candidate-at-point))
-         (book-id (calibredb-getattr (car book-candidate) :id)))
-    book-id))
+         (id (calibredb-getattr (car book-candidate) :id))
+         (title (calibredb-getattr (car book-candidate) :book-title))
+         (author (calibredb-getattr (car book-candidate) :author-sort)))
+    (progn `((id . ,id) (title . ,title) (author . ,author)))))
 
-(defun get-annotations-at-point()
-  (interactive)
-  (setq book-id (get-book-id))
-
-  (let ((books-dir (expand-file-name "books" md--org-resources-dir)))
-    (make-directory books-dir :parents))
-
-  (with-temp-buffer
-    (maphash
-     (lambda (k v)
-       (insert (format "* %s" k))
-       (insert "\n\n")
-       (mapcar (lambda (arg)
-                 (insert arg)
-                 (insert "\n\n"))
-               (nreverse v))
-       (insert "\n"))
-     (get-annotations book-id))
-    (write-region (point-min) (point-max)
-     (expand-file-name
-      (format "books/%s.org" book-id) md--org-resources-dir))))
-
+(defun get-book-annotations()
+  (let* ((book-metadata (get-book-metadata))
+         (book-id (cdr (assoc 'id book-metadata)))
+         (annotations (get-annotations book-id)))
+    (cons `(annotations . ,annotations) book-metadata)))
 
 (provide 'calibredb-annotations)

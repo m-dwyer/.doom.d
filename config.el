@@ -391,6 +391,7 @@
 
 (add-to-list 'load-path (expand-file-name "elisp" doom-private-dir))
 (load-library "calibredb-annotations")
+(load-library "md-utils")
 
 (use-package! calibredb
   :defer t
@@ -399,6 +400,6 @@
   (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
   (setq calibredb-library-alist '(("~/Calibre Library")))
   (map! :map calibredb-search-mode-map
-        :ne "x" #'get-annotations-at-point
+        :ne "x" #'md/org-roam-capture-book-annotations
         )
   )
