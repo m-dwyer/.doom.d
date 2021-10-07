@@ -41,8 +41,9 @@
                                     ,note-path
                                     ,(concat
                                      "#+title: %(plist-get org-capture-plist :title)\n"
-                                     "#+author: %(plist-get org-capture-plist :author)\n\n\n"))
+                                     "#+author: %(plist-get org-capture-plist :author)\n"))
                                    :immediate-finish t
                                    :jump-to-captured t
+                                   :empty-lines 1
                                    :title ,book-title
                                    :author ,book-author))))
