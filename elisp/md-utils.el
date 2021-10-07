@@ -30,10 +30,19 @@
   (setq note-path
         (expand-file-name "books/new.org" md--org-resources-dir))
 
+  (setq book-metadata (get-book-metadata))
+  (setq book-title (cdr (assoc 'title book-metadata)))
+  (setq book-author (cdr (assoc 'author book-metadata)))
+
   (org-roam-capture- :node (org-roam-node-create)
                      :templates `(("b" "book note" plain (function md/annotations-to-org-file)
-                                  :target (file+head ,note-path "#+title: %(plist-get org-capture-plist :title)\n\n")
-                                  :immediate-finish t
-                                  :jump-to-captured t
-                                  :title "aaa"
-                                  :author "xyz"))))
+                                  :target
+                                   (file+head
+                                    ,note-path
+                                    ,(concat
+                                     "#+title: %(plist-get org-capture-plist :title)\n"
+                                     "#+author: %(plist-get org-capture-plist :author)\n\n\n"))
+                                   :immediate-finish t
+                                   :jump-to-captured t
+                                   :title ,book-title
+                                   :author ,book-author))))
