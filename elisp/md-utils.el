@@ -41,7 +41,8 @@
                                       "-${slug}.org")
                                     ,(concat
                                      "#+title: ${title}\n"
-                                     "#+author: %(plist-get org-capture-plist :author)\n"))
+                                     "#+author: %(plist-get org-capture-plist :author)\n"
+                                     "#+filetags: books"))
                                    :immediate-finish t
                                    :jump-to-captured t
                                    :empty-lines 1
