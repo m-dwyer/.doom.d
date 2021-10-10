@@ -1,0 +1,5 @@
+#+title: ${title}
+#+author: %(plist-get org-capture-plist :author)
+#+filetags: note book annotations
+
+%?

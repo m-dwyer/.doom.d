@@ -1,0 +1,10 @@
+* TODO Course: %^{Author} - %^{Title} :course:someday:
+  :PROPERTIES:
+  :Author: %\1
+  :Title:  %\2
+  :Url:
+  :END:
+  - Recommended by: %?
+  :LOGBOOK:
+  - Added: %U
+  :END:

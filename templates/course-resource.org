@@ -1,7 +1,7 @@
 #+title: ${title}
 #+author: ${author}
 #+url:
-#+filetags: course
+#+filetags: resource course
 
 * Summary
 %?

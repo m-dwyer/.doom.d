@@ -8,6 +8,8 @@
          (book-author (cdr (assoc 'author book-details))))
 
   (with-temp-buffer
+    (insert-file-contents md--org-annotations-note-template)
+    (goto-char (point-max))
     (maphash
      (lambda (k v)
        (insert (format "* %s" k))
@@ -32,18 +34,14 @@
         (book-author (cdr (assoc 'author book-metadata))))
 
     (org-roam-capture- :node (org-roam-node-create :title (progn book-title))
-                     :templates `(("b" "book note" plain (function md/annotations-to-org-file)
+                     :templates `(("b" "book annotations" plain (function md/annotations-to-org-file)
                                   :target
-                                   (file+head
+                                   (file
                                     ,(concat
                                       "books/"
                                       (format-time-string "%Y%m%d%H%M%S")
-                                      "-${slug}.org")
-                                    ,(concat
-                                     "#+title: ${title}\n"
-                                     "#+author: %(plist-get org-capture-plist :author)\n"
-                                     "#+filetags: books"))
+                                      "-${slug}.org"))
                                    :immediate-finish t
                                    :jump-to-captured t
-                                   :empty-lines 1
+                                   ;:empty-lines 1
                                    :author ,book-author)))))

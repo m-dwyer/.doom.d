@@ -1,7 +1,7 @@
 #+title: ${title}
 #+author: ${author}
 #+url:
-#+filetags: book
+#+filetags: resource book
 
 * Summary
 %?

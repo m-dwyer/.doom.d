@@ -16,7 +16,7 @@ Unfinished elisp to get Goals from goals file with this area tag
    )
  ))
 (mapconcat
- (lamba (x) ((format "%s") "1"))
+ (lambda (x) ((format "%s") "1"))
  (all-tags)
  "\n"
 ))

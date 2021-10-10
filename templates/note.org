@@ -1,0 +1,2 @@
+#+title: ${title}
+#+filetags: note %^{type|book|course|podcast}

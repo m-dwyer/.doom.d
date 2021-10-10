@@ -98,10 +98,21 @@
   (setq md--org-project-template (expand-file-name "project.org" md--org-templates-dir))
   (setq md--org-area-template (expand-file-name "area.org" md--org-templates-dir))
 
+  ;; These are TODOs signaling my intention to plan/schedule consuming a resource
+  ;; When ready, I can schedule and surface these in my agenda
   (setq md--org-someday-book-template (expand-file-name "someday-book.org" md--org-templates-dir))
+  (setq md--org-someday-course-template (expand-file-name "someday-course.org" md--org-templates-dir))
 
-  (setq md--org-book-note-template (expand-file-name "book-note.org" md--org-templates-dir))
-  (setq md--org-course-template (expand-file-name "course-note.org" md--org-templates-dir))
+  ;; Resources serve to show what I am currently reading or HAVE read, and an entry point into associated notes
+  ;; for these resources.  I separate these from somedays, because they are purely informational, not planning/scheduling
+  ;; This helps to keep planning/scheduling separate from my notes/resources/information
+  (setq md--org-book-resource-template (expand-file-name "book-resource.org" md--org-templates-dir))
+  (setq md--org-course-resource-template (expand-file-name "course-resource.org" md--org-templates-dir))
+
+  ;; Notes are my own specific notes taken for a particular resource.  I could move these into the resource file,
+  ;; but like keeping notes separate to avoid clutter and for accessibility
+  (setq md--org-note-template (expand-file-name "note.org" md--org-templates-dir))
+  (setq md--org-annotations-note-template (expand-file-name "annotations-note.org" md--org-templates-dir))
 
   (setq md--org-inbox (expand-file-name "inbox.org" org-directory))
   (setq md--org-goals (expand-file-name "goals.org" org-directory))
@@ -121,28 +132,28 @@
   (setq org-enforce-todo-dependencies t)
 
   (setq org-todo-keywords
-      '((sequence
-         "TODO(t)" ;; Task to be done at some point, not yet planned
-         "NEXT(n)" ;; Next actionable item to surface on agenda and do
-         "DOING(s)" ;; In progress
-         "WAIT(w)" ;; Waiting on someone / some external blocker
-         "HOLD(h)" ;; Paused by me
-         "|"
-         "DONE(d!)" ;; Task completed
-         "CANCEL(c)" ;; No longer actioning
-         )
-        (sequence "RECUR" "|" "RDONE")
-        (sequence "GOAL" "|" "ACHIEVED")
-        ))
+        '((sequence
+           "TODO(t)" ;; Task to be done at some point, not yet planned
+           "NEXT(n)" ;; Next actionable item to surface on agenda and do
+           "DOING(s)" ;; In progress
+           "WAIT(w)" ;; Waiting on someone / some external blocker
+           "HOLD(h)" ;; Paused by me
+           "|"
+           "DONE(d!)" ;; Task completed
+           "CANCEL(c)" ;; No longer actioning
+           )
+          (sequence "RECUR" "|" "RDONE")
+          (sequence "GOAL" "|" "ACHIEVED")
+          ))
 
   (setq org-tags-exclude-from-inheritance '("project"))
-)
+  )
 
 (defun md/org-mode-visual()
   (setq visual-fill-column-width 100
-       visual-fill-column-center-text t
-       display-fill-column-indicator nil
-       display-line-numbers nil)
+        visual-fill-column-center-text t
+        display-fill-column-indicator nil
+        display-line-numbers nil)
   (visual-fill-column-mode 1))
 
 (add-hook! 'org-mode-hook
@@ -234,7 +245,7 @@
                         (org-agenda-time-grid '(nil (800 1000 1200 1400 1600 1800 2000) "" "----------------"))
                         (org-agenda-prefix-format '((agenda . " %i %?-12t%-6e% s")))
                         )
-                )
+                    )
             (alltodo "" ((org-agenda-overriding-header "")
                          (org-super-agenda-groups
                           '((:name "Overdue (past scheduled/deadline)"
@@ -253,15 +264,15 @@
                             )
                           )
                          )
-            )
+                     )
             )
            )
           ("p" . "Planning")
           ("pm" "Month view"
            (
             (tags-todo "+Goal" ((org-agenda-overriding-header "Goals")
-                        )
-                    )
+                                )
+                       )
             (agenda "" ((org-agenda-span 'month)
                         (org-agenda-start-day "01")
                         (org-super-agenda-groups
@@ -272,18 +283,18 @@
                         )
                     )
             (todo "" ((org-agenda-overriding-header "Things to schedule")
-                        (org-super-agenda-groups
-                         '((:name "Individual tasks"
-                            :file-path "task"
-                           )
-                           (:name "Next tasks"
-                            :todo "NEXT"
-                            )
-                           (:discard (:anything t)))
-                         )
-                        )
-                    )
-           ))
+                      (org-super-agenda-groups
+                       '((:name "Individual tasks"
+                          :file-path "task"
+                          )
+                         (:name "Next tasks"
+                          :todo "NEXT"
+                          )
+                         (:discard (:anything t)))
+                       )
+                      )
+                  )
+            ))
           ))
   :config
   (org-super-agenda-mode))
@@ -307,12 +318,12 @@
   (or plandate (setq plandate (current-time)))
   (or period (setq period 'week))
   (format "%s.org" (pcase period
-                           ('day (format-time-string "%Y-%m-%d" plandate))
-                           ('week (format-time-string "%Y-%m-%B-W%V" plandate))
-                           ('month (format-time-string "%Y-%m-%B" plandate))
-                           ('year (format-time-string "%Y" plandate))
-                           )
-                )
+                     ('day (format-time-string "%Y-%m-%d" plandate))
+                     ('week (format-time-string "%Y-%m-%B-W%V" plandate))
+                     ('month (format-time-string "%Y-%m-%B" plandate))
+                     ('year (format-time-string "%Y" plandate))
+                     )
+          )
   )
 
 (defun md/get-planning-file (&optional period plandate)
@@ -338,7 +349,7 @@
          (file ,md--org-weekly-template))
         ("pd" "Daily Plan" entry
          (file+olp (lambda () (md/get-planning-file 'week (md/prompt-date "Day:" 'md--org-capture-planning-day)))
-          "Weekly Planning" "Dailies")
+                   "Weekly Planning" "Dailies")
          (file ,md--org-daily-template))
         ("t" "Task" entry (file+headline md--org-tasks "Tasks")
          "* TODO %?\n:LOGBOOK:\n-Added: %U\n:END:\n%a\n %i" :empty-lines 1)
@@ -347,6 +358,8 @@
         ("s" "Someday")
         ("sb" "Book" entry (file+headline md--org-someday "Someday")
          (file ,md--org-someday-book-template))
+        ("sc" "Course" entry (file+headline md--org-someday "Someday")
+         (file ,md--org-someday-course-template))
         ))
 
 (use-package! org-edna
@@ -358,10 +371,10 @@
 (setq org-archive-location
       (concat (file-name-as-directory
                (expand-file-name (format-time-string "%Y" (current-time))
-                           md--org-archive-dir)
-         )
-        "%s_archive::datetree/")
-)
+                                 md--org-archive-dir)
+               )
+              "%s_archive::datetree/")
+      )
 
 (use-package! org-journal
   :after org
@@ -377,15 +390,25 @@
   (setq org-roam-directory md--org-resources-dir)
   (setq org-roam-capture-templates
         `(("d" "default" plain "%?"
-           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+           :target (file+head "notes/%<%Y%m%d%H%M%S>-${slug}.org"
                               "#+title: ${title}\n")
+           :empty-lines 1
            :unnarrowed t)
-          ("b" "Book Notes" plain (file ,md--org-book-note-template)
-           :target (file "resources/books/%<%Y%m%d%H%M%S>-${slug}.org")
+          ("r" "Resources")
+          ("rb" "Book Resource" plain (file ,md--org-book-resource-template)
+           :target (file "books/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
-          ("c" "Course Notes" plain (file ,md--org-course-template)
-           :target (file "resources/courses/%<%Y%m%d%H%M%S>-${slug}.org")
-           :unnarrowed t))
+          ("rc" "Course Resource" plain (file ,md--org-course-resource-template)
+           :target (file "courses/%<%Y%m%d%H%M%S>-${slug}.org")
+           :unnarrowed t)
+          ("n" "Resource Notes")
+          ("nb" "Book Notes" plain (file ,md--org-note-template)
+           :target (file "notes/%<%Y%m%d%H%M%S>-${slug}.org")
+           :unnarrowed t)
+          ("nc" "Course Notes" plain (file ,md--org-note-template)
+           :target (file "notes/%<%Y%m%d%H%M%S>-${slug}.org")
+           :unnarrowed t)
+          )
         )
   )
 
