@@ -1,5 +1,14 @@
-* %(format-time-string "%Y-%m-%d" (progn md--org-capture-planning-day))
-** Daily Checklist
+#+title: %<%Y-%m-%d (%A)>
+#+startup: showall
+
+* Daily Overview
+#+begin_src emacs-lisp :results value raw
+#+end_src
+* Do Today
+
+* Maybe Do Today
+
+* Daily Checklist
 - [ ] Action or reschedule overdue tasks
 - [ ] Action scheduled tasks (clock in and out!)
 - [ ] Action listed habits
@@ -8,3 +17,4 @@
 - [ ] Action low effort / NEXT tasks if time
 - [ ] Ensure clocked out of any tasks
 - [ ] Create at least one journal entry
+* Journal

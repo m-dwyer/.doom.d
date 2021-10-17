@@ -412,7 +412,23 @@
            :unnarrowed t)
           )
         )
-  )
+  (setq org-roam-dailies-directory "dailies/")
+  (setq org-roam-dailies-capture-templates
+        (let ((head
+               (with-temp-buffer
+                 (insert-file-contents md--org-daily-template)
+                 (buffer-string))))
+        `(("d" "default" plain "%?"
+           :target (file+head "%<%Y-%m-%d>.org" ,head))
+          ("j" "journal" entry "** %<%H:%M> %?"
+           :target (file+head+olp "%<%Y-%m-%d>.org" ,head ("Journal")))))))
+
+(eval-after-load "org-roam-dailies"
+  '(defun org-roam-dailies-goto-today ()
+    (interactive)
+    (let* ((x (list (car org-roam-dailies-capture-templates)))
+           (org-roam-dailies-capture-templates x))
+      (org-roam-dailies-capture-today t))))
 
 (add-to-list 'load-path (expand-file-name "elisp" doom-private-dir))
 (load-library "calibredb-annotations")

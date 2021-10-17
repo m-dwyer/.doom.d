@@ -5,7 +5,8 @@
 %?
 
 * Weekly Planning
-** Dailies
+** Big Rocks
+
 * Weekly Review
 ** Checklist
 *** Get Clear
