@@ -19,5 +19,5 @@
 - [ ] Review someday/maybe list in incubate.org
 - [ ] Any new, wonderful, harebrained, creative, thought-provoking, risk-taking ideas to capture?
 ** Clocked Tasks
-#+BEGIN: clocktable :properties ("Effort") :hidefiles t :tcolumns 2 :indent t :maxlevels 4 :scope agenda-with-archives :block %(format-time-string "%Y-W%W" (progn md--org-planning-week)) :stepskip0 t :fileskip0 t :formula "@1$2=string(\"Task\")"
+#+BEGIN: clocktable :properties ("Effort") :hidefiles t :tcolumns 2 :indent t :maxlevels 4 :scope agenda-with-archives :block %(format-time-string "%Y-W%W" (progn md--org-capture-planning-week)) :stepskip0 t :fileskip0 t :formula "@1$2=string(\"Task\")"
 #+END: clocktable
