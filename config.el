@@ -147,6 +147,8 @@
           ))
 
   (setq org-tags-exclude-from-inheritance '("project"))
+
+  (setq org-startup-with-inline-images t)
   )
 
 (defun md/org-mode-visual()
@@ -426,3 +428,12 @@
         :ne "x" #'md/org-roam-capture-book-annotations
         )
   )
+
+;; Fix inline images when drag n drop from Chrome
+(defun my-x-dnd-test-function (_window _action types)
+  "X-DND test function that returns copy instead of private as action
+Otherwise the same as the default function"
+  (let ((type (x-dnd-choose-type types)))
+    (when type (cons 'copy type))))
+
+(setq x-dnd-test-function #'my-x-dnd-test-function)
