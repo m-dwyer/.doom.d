@@ -1,4 +1,4 @@
-* TODO Book: %^{Author} - %^{Title} :book:someday:
+* TODO Book: %^{Title} - %^{Author} :book:someday:
   :PROPERTIES:
   :Author: %\1
   :Title:  %\2
