@@ -389,7 +389,7 @@
 
 (use-package! org-roam
   :config
-  (setq org-roam-directory md--org-resources-dir)
+  (setq org-roam-directory org-directory)
   (setq org-roam-capture-templates
         `(("d" "default" plain "%?"
            :target (file+head "notes/%<%Y%m%d%H%M%S>-${slug}.org"
