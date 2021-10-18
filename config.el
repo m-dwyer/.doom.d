@@ -419,16 +419,20 @@
                  (insert-file-contents md--org-daily-template)
                  (buffer-string))))
         `(("d" "default" plain "%?"
-           :target (file+head "%<%Y-%m-%d>.org" ,head))
+           :target (file+head "%<%Y-%m-%d>.org" ,head)
+           :unnarrowed t)
           ("j" "journal" entry "** %<%H:%M> %?"
            :target (file+head+olp "%<%Y-%m-%d>.org" ,head ("Journal")))))))
 
-(eval-after-load "org-roam-dailies"
-  '(defun org-roam-dailies-goto-today ()
-    (interactive)
-    (let* ((x (list (car org-roam-dailies-capture-templates)))
-           (org-roam-dailies-capture-templates x))
-      (org-roam-dailies-capture-today t))))
+(defun my-org-roam-dailies-goto-default (orig-fun &rest args)
+  (interactive)
+  (let* ((x (list (car org-roam-dailies-capture-templates)))
+         (org-roam-dailies-capture-templates x))
+    (apply orig-fun args)))
+
+(advice-add #'org-roam-dailies-goto-today :around #'my-org-roam-dailies-goto-default)
+(advice-add #'org-roam-dailies-goto-tomorrow :around #'my-org-roam-dailies-goto-default)
+(advice-add #'org-roam-dailies-goto-yesterday :around #'my-org-roam-dailies-goto-default)
 
 (add-to-list 'load-path (expand-file-name "elisp" doom-private-dir))
 (load-library "calibredb-annotations")
