@@ -120,6 +120,8 @@
   (setq md--org-recurring-tasks (expand-file-name "recurring.org" org-directory))
   (setq md--org-someday (expand-file-name "someday.org" org-directory))
 
+  (setq md--org-roam-resources-dir (expand-file-name "resources" org-directory))
+
   (setq org-ellipsis " ▾")
 
   (setq org-startup-folded 'fold)
@@ -392,23 +394,28 @@
   (setq org-roam-directory org-directory)
   (setq org-roam-capture-templates
         `(("d" "default" plain "%?"
-           :target (file+head "notes/%<%Y%m%d%H%M%S>-${slug}.org"
+           :target (file+head
+                    (expand-file-name md--org-roam-resources-dir "notes/%<%Y%m%d%H%M%S>-${slug}.org")
                               "#+title: ${title}\n")
            :empty-lines 1
            :unnarrowed t)
           ("r" "Resources")
           ("rb" "Book Resource" plain (file ,md--org-book-resource-template)
-           :target (file "books/%<%Y%m%d%H%M%S>-${slug}.org")
+           :target (file
+                    ,(expand-file-name "books/%<%Y%m%d%H%M%S>-${slug}.org" md--org-roam-resources-dir))
            :unnarrowed t)
           ("rc" "Course Resource" plain (file ,md--org-course-resource-template)
-           :target (file "courses/%<%Y%m%d%H%M%S>-${slug}.org")
+           :target (file
+                    ,(expand-file-name "courses/%<%Y%m%d%H%M%S>-${slug}.org" md--org-roam-resources-dir))
            :unnarrowed t)
           ("n" "Resource Notes")
           ("nb" "Book Notes" plain (file ,md--org-note-template)
-           :target (file "notes/%<%Y%m%d%H%M%S>-${slug}.org")
+           :target (file
+                    ,(expand-file-name "notes/%<%Y%m%d%H%M%S>-${slug}.org" md--org-roam-resources-dir))
            :unnarrowed t)
           ("nc" "Course Notes" plain (file ,md--org-note-template)
-           :target (file "notes/%<%Y%m%d%H%M%S>-${slug}.org")
+           :target (file
+                    ,(expand-file-name "notes/%<%Y%m%d%H%M%S>-${slug}.org" md--org-roam-resources-dir))
            :unnarrowed t)
           )
         )
