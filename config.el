@@ -431,15 +431,31 @@
           ("j" "journal" entry "** %<%H:%M> %?"
            :target (file+head+olp "%<%Y-%m-%d>.org" ,head ("Journal")))))))
 
-(defun my-org-roam-dailies-goto-default (orig-fun &rest args)
+(defun md/org-roam-filter-by-tag (tag-name)
+  (lambda (node)
+    (member tag-name (org-roam-node-tags node))))
+
+(defun md/org-roam-find-by-tag (tag-name)
+  (org-roam-node-find
+   nil
+   nil
+   (md/org-roam-filter-by-tag tag-name)
+   :templates
+   `(("d" "default" plain "%?"
+      :target (file+head
+               "%<%Y%m%d%H%M%S>-${slug}.org"
+               "#+title: ${title}\n")
+      :unnarrowed t))))
+
+(defun md/org-roam-dailies-goto-default (orig-fun &rest args)
   (interactive)
   (let* ((x (list (car org-roam-dailies-capture-templates)))
          (org-roam-dailies-capture-templates x))
     (apply orig-fun args)))
 
-(advice-add #'org-roam-dailies-goto-today :around #'my-org-roam-dailies-goto-default)
-(advice-add #'org-roam-dailies-goto-tomorrow :around #'my-org-roam-dailies-goto-default)
-(advice-add #'org-roam-dailies-goto-yesterday :around #'my-org-roam-dailies-goto-default)
+(advice-add #'org-roam-dailies-goto-today :around #'md/org-roam-dailies-goto-default)
+(advice-add #'org-roam-dailies-goto-tomorrow :around #'md/org-roam-dailies-goto-default)
+(advice-add #'org-roam-dailies-goto-yesterday :around #'md/org-roam-dailies-goto-default)
 
 (add-to-list 'load-path (expand-file-name "elisp" doom-private-dir))
 (load-library "calibredb-annotations")
@@ -457,10 +473,10 @@
   )
 
 ;; Fix inline images when drag n drop from Chrome
-(defun my-x-dnd-test-function (_window _action types)
+(defun md/x-dnd-test-function (_window _action types)
   "X-DND test function that returns copy instead of private as action
 Otherwise the same as the default function"
   (let ((type (x-dnd-choose-type types)))
     (when type (cons 'copy type))))
 
-(setq x-dnd-test-function #'my-x-dnd-test-function)
+(setq x-dnd-test-function #'md/x-dnd-test-function)
