@@ -443,7 +443,7 @@
    :templates
    `(("d" "default" plain "%?"
       :target (file+head
-               "%<%Y%m%d%H%M%S>-${slug}.org"
+               ,(expand-file-name "%<%Y%m%d%H%M%S>-${slug}.org" md--org-roam-resources-dir)
                "#+title: ${title}\n")
       :unnarrowed t))))
 
