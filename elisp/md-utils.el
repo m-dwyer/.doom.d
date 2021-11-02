@@ -27,21 +27,22 @@
   (interactive)
 
   (let ((books-dir (expand-file-name "books" md--org-resources-dir)))
-    (make-directory books-dir :parents))
+    (make-directory books-dir :parents)
 
-  (let* ((book-metadata (get-book-metadata))
-        (book-title (cdr (assoc 'title book-metadata)))
-        (book-author (cdr (assoc 'author book-metadata))))
+    (let* ((book-metadata (get-book-metadata))
+           (book-title (cdr (assoc 'title book-metadata)))
+           (book-author (cdr (assoc 'author book-metadata)))
+           (book-path (expand-file-name
+                       (concat
+                        (format-time-string "%Y%m%d%H%M%S")
+                        "-${slug}.org")
+                       books-dir)))
 
-    (org-roam-capture- :node (org-roam-node-create :title (progn book-title))
-                     :templates `(("b" "book annotations" plain (function md/annotations-to-org-file)
-                                  :target
-                                   (file
-                                    ,(concat
-                                      "books/"
-                                      (format-time-string "%Y%m%d%H%M%S")
-                                      "-${slug}.org"))
-                                   :immediate-finish t
-                                   :jump-to-captured t
-                                   ;:empty-lines 1
-                                   :author ,book-author)))))
+      (org-roam-capture- :node (org-roam-node-create :title (progn book-title))
+                         :templates `(("b" "book annotations" plain (function md/annotations-to-org-file)
+                                       :target
+                                       (file ,book-path)
+                                       :immediate-finish t
+                                       :jump-to-captured t
+                                        ;:empty-lines 1
+                                       :author ,book-author))))))
