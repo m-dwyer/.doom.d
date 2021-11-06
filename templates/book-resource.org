@@ -1,10 +1,21 @@
 #+title: ${title}
 #+author: ${author}
 #+url:
+#+recommended_by:
+#+reading_status:
 #+filetags: resource book
+
+- topics ::
+- tags ::
 
 * Summary
 %?
+* Best Ideas
+1.
+2.
+3.
+4.
+5.
 * Notes
 
 * Learnings
