@@ -1,0 +1,7 @@
+#+title: ${title}
+#+filetags: map
+
+- tags ::
+
+* Meta Details
+%?
