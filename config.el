@@ -395,7 +395,7 @@
   (setq org-roam-capture-templates
         `(("d" "default" plain "%?"
            :target (file+head
-                    (expand-file-name "notes/%<%Y%m%d%H%M%S>-${slug}.org" md--org-roam-resources-dir)
+                    ,(expand-file-name "notes/%<%Y%m%d%H%M%S>-${slug}.org" md--org-roam-resources-dir)
                               "#+title: ${title}\n")
            :empty-lines 1
            :unnarrowed t)
