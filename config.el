@@ -111,8 +111,10 @@
 
   ;; Notes are my own specific notes taken for a particular resource.  I could move these into the resource file,
   ;; but like keeping notes separate to avoid clutter and for accessibility
-  (setq md--org-note-template (expand-file-name "note.org" md--org-templates-dir))
+  (setq md--org-lit-note-template (expand-file-name "note.org" md--org-templates-dir))
   (setq md--org-annotations-note-template (expand-file-name "annotations-note.org" md--org-templates-dir))
+  (setq md--org-fleeting-note-template (expand-file-name "fleeting-note.org" md--org-templates-dir))
+  (setq md--org-permanent-note-template (expand-file-name "permanent-note.org" md--org-templates-dir))
 
   (setq md--org-inbox (expand-file-name "inbox.org" org-directory))
   (setq md--org-goals (expand-file-name "goals.org" org-directory))
@@ -399,6 +401,10 @@
                               "#+title: ${title}\n")
            :empty-lines 1
            :unnarrowed t)
+          ("f" "fleeting" plain (file ,md--org-fleeting-note-template)
+           :target (file
+                    ,(expand-file-name "notes/%<%Y%m%d%H%M%S>-${slug}.org" md--org-roam-resources-dir))
+           :unnarrowed t)
           ("r" "Resources")
           ("rb" "Book Resource" plain (file ,md--org-book-resource-template)
            :target (file
@@ -408,12 +414,12 @@
            :target (file
                     ,(expand-file-name "courses/%<%Y%m%d%H%M%S>-${slug}.org" md--org-roam-resources-dir))
            :unnarrowed t)
-          ("n" "Resource Notes")
-          ("nb" "Book Notes" plain (file ,md--org-note-template)
+          ("n" "Literature Note")
+          ("nb" "Book Note" plain (file ,md--org-lit-note-template)
            :target (file
                     ,(expand-file-name "notes/%<%Y%m%d%H%M%S>-${slug}.org" md--org-roam-resources-dir))
            :unnarrowed t)
-          ("nc" "Course Notes" plain (file ,md--org-note-template)
+          ("nc" "Course Note" plain (file ,md--org-lit-note-template)
            :target (file
                     ,(expand-file-name "notes/%<%Y%m%d%H%M%S>-${slug}.org" md--org-roam-resources-dir))
            :unnarrowed t)
