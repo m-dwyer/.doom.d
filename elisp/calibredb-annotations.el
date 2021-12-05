@@ -3,6 +3,8 @@
 (require 'calibredb-utils)
 (require 'calibredb-core)
 
+(require 'ucs-normalize)
+
 (defun get-annotations(book-id)
   (let* ((json (json-parse-string
               (calibredb-command :command "list"
