@@ -425,7 +425,7 @@
            :unnarrowed t)
           )
         )
-  (setq org-roam-dailies-directory "dailies/")
+  (setq org-roam-dailies-directory md--org-journal-dir)
   (setq org-roam-dailies-capture-templates
         (let ((head
                (with-temp-buffer
